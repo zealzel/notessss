@@ -1,7 +1,30 @@
+* Tutorials
+  - {https://www.youtube.com/watch?v=Bi9JiW5nSig&list=PLx2ksyallYzVI8CN1JMXhEf62j2AijeDa&index=2}[From No Org to Neorg - Workflow, Links | #2]
+  - {https://www.youtube.com/watch?v=InmnEt_vbx4&list=PLx2ksyallYzVI8CN1JMXhEf62j2AijeDa&index=4}[From No Org to Neorg - Faster Editing | #4]
+* Useful commands
+  - :Neorg index & :Neorg return
+  - :Neorg mode traverse-heading|norg
+  -- keybinds: norg(\mn), traverse-heading(\mh)
+  - :Neorg toc left|right
 * keymaps
+** todo lists status
   - \gd -> done
   - \gd -> not-done
-
+** Switch btw ordered & unordered list (core.pivot)
+   - \lt
+   - \li (invert)
+** alt+enter (core.itero)
+   With your cursor in insert mode at the end of the line,
+   pressing the keybind will continue the item at whatever nesting level it is currently at
+** core.promo
+   - normal mode
+   -- iteratively promote/demote the current item
+   --- ">>" && "<<"
+   -- non-iteratively promote/demote the current item
+   --- >. & >,
+   - insert mode
+   -- promote: ctrl+t
+   -- demote: ctrl+d
 
 * Link to anothor norg file
   - This {:personal/todo:}[todo] is a link to personal/todo
@@ -19,8 +42,8 @@
   - {https://www.youtube.com}[youtube]
 
 * Link to heading in anothor norg file
-  - {:../work/todo:*** openrmf}
-  - {:../work/todo:# zbot_lino}
+  ~ {:../work/todo:*** openrmf}
+  ~ {:../work/todo:# zbot_lino}
 
 
 * Some heading
