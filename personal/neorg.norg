@@ -1,0 +1,33 @@
+* keymaps
+  - \gd -> done
+  - \gd -> not-done
+
+
+* Link to anothor norg file
+  - This {:personal/todo:}[todo] is a link to personal/todo
+
+* Link to anothor heading in current file
+  - Strict link
+  - {* some heading} (case insensitive)
+  -- {** h12}
+  -- {* h12} (this can not be found!)
+  - Fuzyy link
+  -- {# head3}
+  -- {# h31}
+
+* Link to url
+  - {https://www.youtube.com}[youtube]
+
+* Link to heading in anothor norg file
+  - {:../work/todo:*** openrmf}
+  - {:../work/todo:# zbot_lino}
+
+
+* Some heading
+* Head1
+** h11
+** h12
+* Head2
+  - h21
+* Head3
+  - h31
