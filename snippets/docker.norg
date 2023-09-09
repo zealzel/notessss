@@ -1,0 +1,55 @@
+* Image
+** list all images
+   docker images
+** remove one or more images (must not have any container before deleting)
+   docker rmi some_image
+
+* Container
+** List
+*** list all running containers
+    docker ps
+*** list all containers
+    docker ps -a
+*** list all containers & file sizes
+    docker ps -a -s
+** Delete
+*** remove one or more containers
+    docker rm some_container
+** Run
+*** 啟動一個 bash 終端，允許使用者進行互動
+    docker run -it ubuntu:14.04 /bin/bash
+*** 啟動一個 bash 終端，允許使用者進行互動，退出時關閉容器
+    docker run -it --rm ubuntu:14.04 /bin/bash
+*** run container with docker volume
+    docker run --rm -it -v my_volume:/workdir some_container --workdir=/workdir
+*** Image的Dockerfile若有CMD指令，啟動container後，若想進bash，需下指令
+    docker exec -it some_container bash
+*** stop container
+    docker stop some_container
+*** delete container
+    docker rm some_container
+** copy
+*** 在host跟容器間複製檔案
+    docker cp foo.txt mycontainer:/foo.txt
+    docker cp mycontainer:/foo.txt foo.txt
+** Inspect *** Show docker disk usage
+    docker system df
+*** Show docker disk usage with more detailed view
+    docker system df -v
+
+* Docker Hub
+** Push to Docker Hub
+   docker login
+   docker tag u20zsh zealzel/u20zsh:test
+   docker push zealzel/u20zsh:test
+
+* docker-compose
+** Build
+*** Only rebuild one service without cache when using docker-compose-1.yml up
+    docker-compose -f docker-compose-1.yml build --no-cache ros-build-machine
+    docker-compose -f docker-compose-1.yml build --no-cache ros-raspi-1
+*** Only rebuild one service without cache when using docker-compos-2.ymle up
+    docker-compose -f docker-compose-2.yml build --no-cache ros-build-machine-lvim
+    docker-compose -f docker-compose-2.yml build --no-cache ros-raspi-2
+*** up
+    docker-compose -f docker-compose-2.yml up -d

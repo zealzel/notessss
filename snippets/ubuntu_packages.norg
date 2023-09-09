@@ -1,0 +1,29 @@
+* ubuntu
+  software-properties-common
+  - apt-add-repository
+
+
+* apt-key
+  The difference btw /etc/apt/sources.list & /etc/apt/sources.list.d/
+  - The /etc/apt/sources.list file contains the list of software repositories that are enabled for the system.
+--- The /etc/apt/sources.list.d/ directory contains additional files that can be used to add additional software repositories to the system.
+
+* packages management
+** Lists packages
+   dpkg -L software-name
+   apt-cache show software-name
+   apt-cache search software-name
+   python3 -m pip show software-name
+** Find the binary file provided by a package
+   dpkg -L software-properties-common |grep 'bin'
+   /usr/bin
+   /usr/bin/add-apt-repository
+   /usr/bin/apt-add-repository
+
+* locale settings
+  locale  # check for UTF-8
+  sudo apt update && sudo apt install locales
+  sudo locale-gen en_US en_US.UTF-8
+  sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+  export LANG=en_US.UTF-8
+  locale  # verify settings

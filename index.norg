@@ -1,6 +1,7 @@
 * Work
-  - {:work/todo:}
+  - {:work/todo:}[work todo]
 * Personal
+  - {:personal/todo:}[todo]
 * Productivity
+  - {:snippets/code_snippets:}[code snippets]
   - {:personal/neorg:}[neorg]
-

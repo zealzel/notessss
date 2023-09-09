@@ -1,0 +1,16 @@
+* git
+  git init -b main
+  git push -u origin main
+
+* gh
+  gh repo list
+  gh repo list fitfabsw (default -L 30)
+  gh repo list fitfabsw -L 100
+  gh repo fork JustasMasiulis/lazy_importer --fork-name proj1 --clone
+
+* git submodule
+  git submodule add https://github.com/username/repo.git
+  git submodule init
+  git submodule update
+  git submodule update --init # most likely you want this
+  git submodule update --init --recursive

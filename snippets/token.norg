@@ -1,0 +1,11 @@
+* one-liner setup scripts
+** for root
+   apt update && apt install git -y && cd && rm -rf zealdot/ >/dev/null 2>&1 && git clone https://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@github.com/zealzel/zealdot && cd zealdot && source setup_my.sh
+** for non-root user
+   sudo apt update && sudo apt install git -y && cd && rm -rf zealdot/ >/dev/null 2>&1 && git clone https://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@github.com/zealzel/zealdot && cd zealdot && source setup_my.sh
+* github tokens:
+  - expired: no expired
+  - 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
+* Lindoe tokens:
+  - For resuming image
+  - 1aedea90cd902f42e6450e19db7ec1bfac1bf68741dc35b03e75e7b7b5673974
