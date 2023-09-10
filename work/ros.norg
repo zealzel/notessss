@@ -1,0 +1,35 @@
+* footprint influence on obstacle avoidance
+  Define footprint as a polygon with 4 vertices which fits to the real zbot_lino v1.5
+  - defined footprint
+  -- footprint: "[[-0.055, -0.14], [-0.055, 0.14], [0.3207, 0.14], [0.3207, -0.14]]"
+** Experiment1: Use different followpath controllers to test the influence of footprint on obstacle avoidance
+*** case1: dwb controller (default)
+    - distro: humble
+    - robot: zbot_lino
+    - map: turtlebot world
+    - followpath controller: dwb
+    - define footprint: yes
+**** results:
+     - stuck into wall from time to time
+*** case2: mppi controller
+    - distro: humble
+    - robot: zbot_lino
+    - map: turtlebot world
+    - followpath controller: mppi
+    - define footprint: yes
+**** results:
+     - reliable obstacle avoidance performance
+
+* local_costmap not shown in rviz
+  local_costmap is not shown in rviz, which affects the performance of obstacle avoidance
+*** condition
+    - distro: humble
+    - robot: turtlebot3
+    - map: turtlebot world
+**** launch files
+     TURTLEBOT3_MODEL=waffle ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
+     ros2 launch nav2_bringup bringup_launch.py map:=/opt/ros/$ROS_DISTRO/share/turtlebot3_navigation2/map/map.yaml
+     ros2 launch nav2_bringup rviz_launch.py
+*** solution
+    - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+    - make sure the network of current running virutal machine is not shared with other virutal machines as well

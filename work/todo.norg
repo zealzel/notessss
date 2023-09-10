@@ -16,7 +16,7 @@
 ** zbot lino v2.0
 *** nanoScan3
 **** (x) 去7-11領取M12-4pin/RJ45轉接頭
-**** ( ) 安裝Safety_Designer (windows)
+**** (x) 安裝Safety_Designer (windows)
 **** ( ) 連結 nanoScan3，執行Safety_Designer，並顯示掃描光點
 **** ( ) 研究 nanoScan3 的ROS2 driver，可在rviz上顯示掃描光點
      - {https://github.com/SICKAG/sick_safetyscanners2}[sick_safetyscanners2]
