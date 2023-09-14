@@ -2,7 +2,7 @@
 
 ## ROS2
 
-### zbot_artic
+### zbot_articd
 
 #### 更新 FIT ros packages 自動安裝腳本於 zbot_artic.sh
 
