@@ -1,6 +1,6 @@
 # Projects
 
-## ROS2s
+## ROS2
 
 ### zbot_artic
 
