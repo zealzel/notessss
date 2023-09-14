@@ -1,3 +1,27 @@
+* local_costmap not shown in rviz
+  local_costmap is not shown in rviz, which affects the local obstacle avoidance (serious)
+*** condition
+    - distro: humble
+    - robot: turtlebot3
+    - map: turtlebot world
+**** launch files
+     TURTLEBOT3_MODEL=waffle ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
+     ros2 launch nav2_bringup bringup_launch.py map:=/opt/ros/$ROS_DISTRO/share/turtlebot3_navigation2/map/map.yaml
+     ros2 launch nav2_bringup rviz_launch.py
+*** symptoms
+    - not stable, sometimes it works, sometimes it doesn't
+*** solution
+    ~ Always make sure the use_sim_time parameters for all are set to true. Each launch file may vary. Be careful.
+      For example, for the navigation launch file of linorobot2, the correct one is
+      \$ ros2 launch linorobot2_navigation navigation.launch.py sim:=True ... instead of
+      \$ ros2 launch linorobot2_navigation navigation.launch.py use_sim_time:=True ...
+      you can check the use_sim_time parameter by following commands
+      \$ ros2 param get /local_costmap/local_costmap use_sim_time
+      Boolean value is: True
+    ~ RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+    ~ (TBD, 應不是主因) nav2_params settings local_costmap/local_costmap should be
+          plugins: \["voxel_layer", "inflation_layer"\] instead of
+          plugins: \["obstacle_layer", "inflation_layer"\] (馬達工程師)
 * footprint influence on obstacle avoidance
   Define footprint as a polygon with 4 vertices which fits to the real zbot_lino v1.5
   - defined footprint
@@ -19,17 +43,3 @@
     - define footprint: yes
 **** results:
      - reliable obstacle avoidance performance
-
-* local_costmap not shown in rviz
-  local_costmap is not shown in rviz, which affects the performance of obstacle avoidance
-*** condition
-    - distro: humble
-    - robot: turtlebot3
-    - map: turtlebot world
-**** launch files
-     TURTLEBOT3_MODEL=waffle ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
-     ros2 launch nav2_bringup bringup_launch.py map:=/opt/ros/$ROS_DISTRO/share/turtlebot3_navigation2/map/map.yaml
-     ros2 launch nav2_bringup rviz_launch.py
-*** solution
-    - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
-    - make sure the network of current running virutal machine is not shared with other virutal machines as well

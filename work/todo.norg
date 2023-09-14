@@ -2,26 +2,70 @@
 ** ROS2
 *** zbot_artic
 **** (-) 更新 FIT ros packages 自動安裝腳本於 zbot_artic.sh
-     - ( ) usb_cam (Jason)
      - (x) fitrobot & fitrobot_interfaces
      - (x) rosboard
+     - ( ) usb_cam (Jason)
      - ( ) systemctl
+**** Issues
+***** 驅動板DC模塊電壓不足，無法啟動rplidarA1
+      - 更換了電容後，問題依舊
+***** segmentation fault
+      1. ros2 launch articubot_one navigation.launch.py map:="/home/pi/maps/office3_res0.02_0523.yaml"
+      2. ros2 lifecycle set {behavior_server,controller_server} deactivate
+      3. Error as below
+      ...
+      [component_container_isolated-1] [INFO] [1694680138.132940018] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+      [component_container_isolated-1] terminate called after throwing an instance of 'std::runtime_error'
+      [component_container_isolated-1]   what():  Node '/local_costmap/local_costmap' has already been added to an executor.
+      [component_container_isolated-1] Magick: abort due to signal 6 (SIGABRT) "Abort"...
+      [ERROR] [component_container_isolated-1]: process has died [pid 4231, exit code -6, cmd '/opt/ros/humble/lib/rclcpp_components/component_container_isolated --ros-args --log-level info --ros-args -r __node:=nav2_container --params-file /tmp/tmpx4dje3b_ --params-file /tmp/launch_params_6m1i8484 -r /tf:=tf -r /tf_static:=tf_static'].
 *** zbot_lino
-*** ( ) simulation
-**** ( ) 建立 nanoScan3 的 gazebo 模型 (角度: 275°)
-**** ( ) 建立 zbot lino v2.0 的 gazebo 模型 (2個Lidar)
+****  (x) 測試 RF dongle
+          初步測試OK. 但要連上我的iPhone，須勾選最大相容性選項
+****  ( ) 測試 zbot1.5 載重
+      -- ( ) 製作載重支架 (Dabin) -> 請宗樺尋找合適板材 (木頭/壓克力/金屬)
+      -- ( ) 秤重測試 (Dabin)
+      -- ( ) 確定載重上限標準 (Wayne)
+**** ( ) nanoScan3 Integration (tested on sd card a8)
+***** (x) A. tf tree bug: (sd card a4, adata is normal)
+           1. 執行 ros2 launch linorobot2_description description.launch.py 沒有 tf tree
+               (normal: base_footprint, left_wheel_link, right_wheel_link, ...)
+           2. 執行 ros2 launch linorobot2_bringup bringup.launch.py, tf tree 沒有 left_wheel_link 和 right_wheel_link
+           (normal: odom, base_footprint, left_wheel_link, right_wheel_link, ...)
+           (核心問題) 沒有正確配置 cyclonedds 的網路設定，導致樹莓派上同時無線/有線網路時，PC上無法正常進行ROS通訊
+***** (x) B. slam
+           map tf 無法順利更新，fixed frame 為 map 時無法顯示 scan 光點
+           colcon build nav2 stack (humbe)，似乎沒有這個問題 -> TBD
+           build 時間過久，可以儘量使用 binary package
+***** ( ) C. 導航
+           解決問題A後，發生 segmentation fault 問題 (似乎使用 mppi controler 才有)
+*** (-) simulation
+    - (x) 解決 local costmap 在 rviz 沒有顯示的問題 {:ros:# local_costmap not shown in rviz}[link]
+    - (x) 釐清 footprint 對於避障的效果
+    - (x) 建立 nanoScan3 的 gazebo 模型 (角度: 275°) & 反向
+    - ( ) 建立 zbot lino v2.0 的 gazebo 模型 (2個Lidar)
 *** openrmf/traffic-editor
-**** ( ) 建立辦公室 model
-**** 建立工廠 model
+    - ( ) 建立辦公室 model
+    - ( ) 建立工廠完整 model
 ** zbot lino v2.0
 *** nanoScan3
-**** (x) 去7-11領取M12-4pin/RJ45轉接頭
-**** (x) 安裝Safety_Designer (windows)
-**** ( ) 連結 nanoScan3，執行Safety_Designer，並顯示掃描光點
-**** ( ) 研究 nanoScan3 的ROS2 driver，可在rviz上顯示掃描光點
-     - {https://github.com/SICKAG/sick_safetyscanners2}[sick_safetyscanners2]
+    - (x) 去7-11領取M12-4pin/RJ45轉接頭
+    - (x) 安裝Safety_Designer (windows)
+    - (x) 連結 nanoScan3，Windows 執行Safety_Designer，並顯示掃描光點
+    - (x) 連接樹莓派，研究 nanoScan3 的ROS2 driver，可在rviz上顯示掃描光點
+     - ref: {https://www.youtube.com/watch?v=KypUsANM7kI:}[SICK Simple Safety Laser Scanner Set-up]
+     - 需更改 source codes，分別修改 launch/sick_safetyscanners2_launch.py 和 launch/sick_safetyscanners2_lifecycle_launch.py
+       更改sensor_ip & host_ip 為 192.168.1.2 和 192.168.1.3
+    - ROS2 dirver:
+    -- {https://github.com/SICKAG/sick_safetyscanners_base}[sick_safetyscanners_base] (branch: ros2)
+    -- {https://github.com/SICKAG/sick_safetyscanners2_interfaces}[sick_safetyscanners2_interfaces]
+    -- {https://github.com/SICKAG/sick_safetyscanners2}[sick_safetyscanners2]
 *** 避障
 **** realsense
 **** 超音波感測器
+     - ( ) 測試連接樹莓派
 *** motor
 **** 整理馬達比較表
+* 庶務
+** 找人
+*** ( ) 約談面試 劉耀鴻 (馬達工程師)，已請Nash約時間
